@@ -1,20 +1,17 @@
 # 1、导入模块
 import logging
 from config import project_config as conf
-
-
 # 2、封装一个LoggingUtil工具类
 class LoggingUtil(object):
     # 其实就是为了获得logger对象
-    def __init__(self, level=logging.INFO):
-        self.logger = logging.getLogger()
+    def __init__(self, name=None, level=logging.INFO):
+        self.logger = logging.getLogger(name)
         self.logger.setLevel(level)
 
-
 # 3、定义一个init_logger()方法，用于初始化对象
-def init_logger():
+def init_logger(name=None):
     # 第一步：创建日志对象
-    logger = LoggingUtil().logger
+    logger = LoggingUtil(name).logger
     # 第二步：创建日志处理器
     file_handler = logging.FileHandler(
         filename=conf.log_path + conf.log_name,

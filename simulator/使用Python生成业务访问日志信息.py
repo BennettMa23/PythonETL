@@ -8,7 +8,7 @@ import time
 single_log_lines = 1024  # 一个logs文件生成多少行数据
 generate_files = 5  # 一次运行生成多少个文件
 
-output_path = "D:/IT-gongcheng/ETL/PythonETL/logs/"  # 此目录必须提前创建，否则会导致无法生成日志到指定目录
+output_path = "D:/IT-gongcheng/ETL/input/logs/"  # 此目录必须提前创建，否则会导致无法生成日志到指定目录
 log_level_array = ['WARN', 'WARN', 'WARN', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO',
                    'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO',
                    'ERROR']

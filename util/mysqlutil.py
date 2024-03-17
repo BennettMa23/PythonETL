@@ -3,7 +3,7 @@ import pymysql
 from util import loggingutil
 
 # 2、创建一个日志对象，用于生成日志信息
-logger = loggingutil.init_logger()
+logger = loggingutil.init_logger('mysql')
 
 # 3、定义一个MysqlUtil工具类
 class MysqlUtil(object):
@@ -95,8 +95,9 @@ class MysqlUtil(object):
     def check_table_exists_and_create(self, db_name, tb_name, tb_cols):  # create table T(id int, name varchar(20))
         # 第一步：判断数据表是否存在
         if not self.check_table_exists(db_name, tb_name):
-            # 第二步：如果数据表不存在，则自动创建该数据表
+            # 第二步：如果数据表不存在，则自动创建该数据表（错误演示位置）
             sql = f'create table {tb_name}({tb_cols}) engine=innodb default charset=utf8;'
+            # print(sql)
             self.execute(sql)
             logger.info(f'{tb_name}在数据库{db_name}中已经创建成功')
         else:
@@ -125,10 +126,23 @@ class MysqlUtil(object):
     def insert_single_sql(self, sql):
         # 引入try...except...else，捕获异常
         try:
-            self.execute(sql)
+            self.execute(sql)  # 自动执行sql语句并提交事务
         except Exception as e:
             logger.error(f'{sql}插入语句执行异常，报错信息为：{e}')
             raise e  # 抛出异常到终端，阻碍代码的继续执行
+        else:
+            logger.info(f'{sql}插入语句执行成功，没有任何异常')
+
+    # 添加一个insert_single_sql_without_commit
+    def insert_single_sql_without_commit(self, sql):
+        try:
+            # 获取游标
+            cursor = self.conn.cursor()
+            # 执行sql语句
+            cursor.execute(sql)  # 获取游标执行sql语句，但是没有自动提交
+        except Exception as e:
+            logger.error(f'{sql}插入语句执行异常，报错信息为：{e}')
+            raise e
         else:
             logger.info(f'{sql}插入语句执行成功，没有任何异常')
 

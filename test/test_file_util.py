@@ -48,5 +48,5 @@ class TestFileUtil(unittest.TestCase):
         # 第三步：self.assertListEqual()对比返回结果与预期结果是否一致
         self.assertListEqual(result, ['d.txt', 'e.txt'])
 
-    # 小结：单元测试，必须让自定义测试类继承自(unittest.TestCase)；编写测试函数时，比如以(test_)开头 + 要测试函数名称；最终结果判断函数的执行与
+    # 必须让自定义测试类继承自(unittest.TestCase)；编写测试函数时，比如以(test_)开头 + 要测试函数名称；最终结果判断函数的执行与
     # 预期结果是否一致，如果一致，测试成功。
